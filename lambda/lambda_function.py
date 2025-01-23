@@ -30,7 +30,7 @@ DATASOURCE = {
         "properties": {
             "backgroundImage": "https://d2o906d8ln7ui1.cloudfront.net/images/response_builder/background-green.png",
             "foregroundImageLocation": "left",
-            "foregroundImageSource": "https://d2o906d8ln7ui1.cloudfront.net/images/response_builder/asparagus.jpeg",
+            "foregroundImageSource": "https://www.shutterstock.com/image-photo/orange-cat-sits-looking-straight-600nw-2479857351.jpg",
             "headerTitle": "",
             "headerSubtitle": "",
             "hintText": "Try, \"More Cats\"",
@@ -93,7 +93,7 @@ class YesIntentHandler(AbstractRequestHandler):
         session_attributes = handler_input.attributes_manager.session_attributes
         last_intent = session_attributes.get("last_intent")
 
-        if last_intent == "givecatintent":
+        if last_intent == "givecatintent" or "ShowMeCat":
             speak_output = "You get a cat! Would you like another cat?"
             return (
                 handler_input.response_builder
@@ -177,7 +177,7 @@ class ShowMeCat(AbstractRequestHandler):
         # Add APL Template if device is compatible
         self.launch_screen(handler_input)
         # Generate JSON Response
-        return handler_input.response_builder.response
+        return handler_input.response_builder.speak("You get a cat! Would you like another cat?").set_should_end_session(False).response
 
 
 class HelpIntentHandler(AbstractRequestHandler):
